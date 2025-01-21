@@ -76,3 +76,14 @@ type TurnstileTaskProxylessRequest struct {
 	WebsiteURL string `json:"websiteURL"`
 	WebsiteKey string `json:"websiteKey"`
 }
+
+type CloudFlareTaskRequest struct {
+	Type            string            `json:"type"`
+	WebsiteURL      string            `json:"websiteURL"`
+	WaitLoad        bool              `json:"waitLoad"`
+	BlockImage      bool              `json:"blockImage"`
+	UserAgent       string            `json:"userAgent"`
+	RequiredCookies []string          `json:"requiredCookies"`
+	Proxy           string            `json:"proxy"`
+	PostData        map[string]string `json:"postData"`
+}

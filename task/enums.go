@@ -57,3 +57,8 @@ const (
 	TurnstileTaskProxyless   = "TurnstileTaskProxyless"
 	TurnstileTaskProxylessM1 = "TurnstileTaskProxylessM1"
 )
+
+// CloudFlareTask: Cloudflare5秒盾协议接口
+const (
+	CloudFlareTaskS2 = "CloudFlareTaskS2"
+)

@@ -1,3 +1,3 @@
-module github.com/deanxv/yescaptcha-go
+module github.com/ScoLib/yescaptcha-go
 
 go 1.19

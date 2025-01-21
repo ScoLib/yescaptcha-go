@@ -3,11 +3,12 @@ package yescaptcha
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/deanxv/yescaptcha-go/req"
-	"github.com/deanxv/yescaptcha-go/res"
-	"github.com/deanxv/yescaptcha-go/url"
 	"io"
 	"net/http"
+
+	"github.com/ScoLib/yescaptcha-go/req"
+	"github.com/ScoLib/yescaptcha-go/res"
+	"github.com/ScoLib/yescaptcha-go/url"
 )
 
 type Client struct {
@@ -139,6 +140,17 @@ func (c *Client) CreateFunCaptchaClassification(task *req.FunCaptchaClassificati
 // 创建识别任务-TurnstileTaskProxyless: CloudflareTurnstile协议接口
 // refs: https://yescaptcha.atlassian.net/wiki/spaces/YESCAPTCHA/pages/61734913/TurnstileTaskProxyless+CloudflareTurnstile
 func (c *Client) CreateTurnstileTaskProxyless(task *req.TurnstileTaskProxylessRequest) (createTaskResponse res.CreateTaskResponse, err error) {
+	resBytes, err := c.post(c.BaseUrl+url.CreateTask, &req.CreateTaskRequest{ClientKey: c.ClientKey, Task: task, SoftID: c.SoftID})
+	if err != nil {
+		return
+	}
+	err = decodeResponse(resBytes, &createTaskResponse)
+	return
+}
+
+// 创建识别任务-CloudFlareTask:  CloudFlare5秒盾协议接口
+// refs: https://yescaptcha.atlassian.net/wiki/spaces/YESCAPTCHA/pages/86409217/CloudFlareTask+CloudFlare5
+func (c *Client) CreateCloudFlareTask(task *req.CloudFlareTaskRequest) (createTaskResponse res.CreateTaskResponse, err error) {
 	resBytes, err := c.post(c.BaseUrl+url.CreateTask, &req.CreateTaskRequest{ClientKey: c.ClientKey, Task: task, SoftID: c.SoftID})
 	if err != nil {
 		return
